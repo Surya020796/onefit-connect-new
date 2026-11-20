@@ -1,0 +1,47 @@
+/* OneFit visual refresh: only styling; existing application logic is untouched. */
+:root{--navy:#141c16;--blue:#bef15b;--blue2:#a8e03c;--bg:#f3f5ed;--ink:#172019;--muted:#66736a;--line:#dfe6da;--shadow:0 16px 40px rgba(20,34,22,.08)}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 3% 12%,rgba(197,232,136,.25),transparent 40%),radial-gradient(ellipse at 100% 45%,rgba(175,209,183,.20),transparent 38%),repeating-linear-gradient(130deg,transparent 0 48px,rgba(43,75,42,.018) 49px 50px),#f3f5ed;color:var(--ink)}
+.topbar{min-height:68px;background:#121a15;border-bottom:1px solid rgba(255,255,255,.10);box-shadow:0 6px 18px rgba(15,29,18,.14);padding:0 clamp(18px,4vw,55px)}
+.brand{font-size:20px;letter-spacing:-.6px;gap:11px}
+.brandmark{width:36px;height:36px;background:#c2f064;color:#172319;box-shadow:0 0 0 4px rgba(192,240,100,.10);font-size:23px}
+.top-actions button{border-radius:8px;color:#f2f7f0;border-color:#ffffff38}
+.top-actions button:hover{background:#ffffff25}
+.main.wide:has(.role-grid){max-width:1370px;padding:28px clamp(18px,4vw,56px) 45px}
+.hero{position:relative;isolation:isolate;min-height:345px!important;margin:0!important;padding:57px clamp(26px,5vw,70px)!important;border-radius:22px!important;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;background-image:linear-gradient(95deg,rgba(11,22,15,.98) 0%,rgba(12,28,17,.90) 32%,rgba(18,33,20,.66) 56%,rgba(18,33,20,.05) 100%),url("./assets/gym-interior.png")!important;background-position:center,center 44%!important;background-size:cover,cover!important;background-repeat:no-repeat!important;box-shadow:0 25px 55px rgba(19,37,21,.20)}
+.hero::before{content:"";width:62px;height:5px;border-radius:20px;background:#c0ef5b;position:absolute;top:33px;left:clamp(26px,5vw,70px);z-index:1;box-shadow:0 0 28px #b8ef4380}
+.hero::after{content:"ONEFIT / MOVE BETTER";right:25px;bottom:22px;color:#edf9e3;font-size:11px;letter-spacing:2.4px;text-shadow:0 2px 9px #000}
+.hero h1{position:relative;z-index:1;color:#fff!important;font-size:clamp(39px,5.3vw,72px)!important;line-height:1!important;letter-spacing:-2.7px!important;font-weight:900;max-width:695px;margin:10px 0 18px!important;text-shadow:0 4px 22px #0008!important}
+.hero p{position:relative;z-index:1;max-width:550px;color:#edf5e8!important;font-size:clamp(13px,1.1vw,16px)!important;font-weight:650;letter-spacing:.35px!important;line-height:1.65;opacity:1!important;text-shadow:0 2px 11px #0009}
+.role-grid{grid-template-columns:1.13fr 1fr 1fr;gap:20px;max-width:1180px;margin:26px auto 20px!important;align-items:stretch}
+.role-card{min-width:0;padding:13px 14px 16px;border-radius:17px!important;border:1px solid #dce5d7!important;background:#fff!important;box-shadow:0 17px 42px #162c1615!important;transition:transform .2s ease,box-shadow .2s ease}
+.role-card:hover{transform:translateY(-5px);box-shadow:0 22px 55px #172c1929!important}
+.role-image{position:relative;height:190px!important;border-radius:11px!important;margin-bottom:15px;overflow:hidden;background-color:#263d2b;background-image:linear-gradient(180deg,transparent 44%,rgba(0,0,0,.60)),url("./assets/gym-interior.png")!important;background-size:cover!important;filter:none!important}
+.role-card:nth-child(1) .role-image{background-image:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.68)),url("./assets/gym-interior.png")!important;background-position:left 46%!important}
+.role-card:nth-child(2) .role-image{background-image:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.68)),url("./assets/gym-interior.png")!important;background-position:52% center!important}
+.role-card:nth-child(3) .role-image{background-image:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.68)),url("./assets/gym-interior.png")!important;background-position:right center!important}
+.role-image::after{content:"ONEFIT / PORTAL";position:absolute;bottom:14px;left:14px;font-weight:800;color:#fff;letter-spacing:1.9px;font-size:10px;padding:6px 9px;background:rgba(10,24,14,.65);border:1px solid rgba(255,255,255,.28);border-radius:5px;backdrop-filter:blur(5px)}
+.role-card:nth-child(1) .role-image::after{content:"01 / MEMBER"}
+.role-card:nth-child(2) .role-image::after{content:"02 / FRONT DESK"}
+.role-card:nth-child(3) .role-image::after{content:"03 / MANAGER"}
+.role-card h3{font-size:24px;letter-spacing:-.85px;font-weight:820;color:#17231b;margin:0 5px 8px}
+.role-card > p{margin:0 5px 18px;color:#607166;font-size:13px;line-height:1.55}
+.role-card select{margin-top:auto;min-height:44px}
+.member-login{padding:0 5px;gap:5px}
+.member-login label{color:#213728;font-size:12px}
+.member-login input,.role-card select{min-height:44px;border-color:#d4e0d0;background:#fbfdf9}
+.member-login input:focus,.role-card select:focus{border-color:#88ba43;box-shadow:0 0 0 3px #b8ef4342}
+.member-login .login-help{color:#657464;font-size:11px;line-height:1.5}
+.role-card button:not(.show-password){min-height:43px;border-radius:9px;font-weight:800}
+.role-card button:not(.secondary):not(.show-password){background:#bdf05c;color:#1b2919;box-shadow:inset 0 -1px 0 #a9df42}
+.role-card button:not(.secondary):not(.show-password):hover{background:#a8df46}
+.role-card button.secondary{border-radius:9px}
+.role-card:nth-child(2)>button,.role-card:nth-child(3)>button{margin-top:10px}
+.notice{max-width:1180px;margin:15px auto!important;border:1px solid #dbe7c8;background:#eaf1df!important;color:#40523b!important;border-radius:10px;line-height:1.55}
+.footer{color:#718071;letter-spacing:.9px}
+.sidebar{background:#19251d}
+.navbtn:hover,.navbtn.active{background:#bdf05c;color:#172719}
+.card,.kpi{border-color:#dae4d7}
+.kpi .value{color:#182a1d}
+@media(max-width:950px){.role-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:830px}.hero{min-height:305px!important}}
+@media(max-width:650px){.main.wide:has(.role-grid){padding:14px 14px 32px}.hero{min-height:285px!important;padding:48px 25px 36px!important;background-position:center,58% center!important;border-radius:15px!important}.hero::before{left:25px;top:24px;width:42px}.hero h1{font-size:clamp(34px,8vw,48px)!important;letter-spacing:-1.6px!important;max-width:340px}.hero p{font-size:13px!important;max-width:335px}.hero::after{right:15px;bottom:12px;font-size:8px}.role-grid{grid-template-columns:1fr;gap:15px;margin:18px auto!important}.role-image{height:180px!important}.role-card h3{font-size:22px}.topbar{padding:0 13px}.brand{font-size:16px}.top-actions{gap:6px}.top-actions button{padding:8px 10px;font-size:12px}}
