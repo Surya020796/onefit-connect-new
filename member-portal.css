@@ -152,3 +152,245 @@ body.member-mode .member-app-page .class-card .meta{color:#62748f}
  .member-insight-item{min-height:55px}
  body.member-mode .top-actions #roleTag{display:none}
 }
+
+
+/* OneFit native visual language — an interpretation, not a copy of the blue reference. */
+body.member-mode{
+  --navy:#17221a;--blue:#bbec60;--blue2:#a5d94d;
+  --bg:#f5f7f0;--ink:#1c2a20;--muted:#647366;--line:#e0e7dc;
+  background:radial-gradient(circle at 93% 5%,#e5efd5,transparent 36%),#f5f7f0;
+  color:#19271d;
+}
+body.member-mode .topbar{
+  background:#121b15;
+  border-bottom:1px solid #e0f4d01c;
+  box-shadow:0 5px 18px #152f1817;
+}
+body.member-mode .brandmark{
+  color:#172319;
+  border-radius:50%;
+  background:#bbed59;
+  box-shadow:0 0 0 4px #bbed591b;
+}
+body.member-mode #roleTag{
+  background:#bdeb5e26;color:#dcf4ba;border:1px solid #bdeb5e33;
+}
+body.member-mode .member-top-identity small{color:#c9dbca}
+body.member-mode .top-actions button{border-color:#ffffff44;color:#f6f9f3}
+body.member-mode .sidebar.show{
+  background:#fff;
+  border-bottom-color:#e3e8dd;
+  box-shadow:0 3px 12px #15271808;
+}
+body.member-mode .navbtn{color:#586d5c}
+body.member-mode .navbtn:hover{background:#f2f8e9;color:#335d27}
+body.member-mode .navbtn.active{
+  color:#1d421c;
+  border-bottom-color:#a7d94e;
+  background:linear-gradient(0deg,#eff8df,transparent 80%);
+}
+body.member-mode .main,body.member-mode .main.wide{max-width:1500px}
+body.member-mode button{
+  background:#b9ed61;color:#192818;
+  border-radius:9px;
+  font-weight:800;
+}
+body.member-mode button:hover{background:#a8d84f;color:#182619}
+body.member-mode button.secondary{background:#fff;color:#2a4f28;border-color:#cbdcbd}
+body.member-mode .card,body.member-mode .kpi,
+body.member-mode .member-panel{border-color:#e1e9dc;box-shadow:0 8px 25px #213e250d}
+body.member-mode .section-head h2,
+body.member-mode .member-section-title,
+body.member-mode .member-panel-title{color:#203b26}
+body.member-mode .member-panel-title svg{color:#6fa53e}
+body.member-mode .member-inline-link{color:#3d762f!important}
+body.member-mode .member-stats .member-stat{
+  background:#fff;
+  border-color:#e0e7dc;
+  box-shadow:0 7px 23px #203a2109;
+}
+body.member-mode .member-stat-icon{
+  background:#e8f7d4!important;
+  color:#426f27!important;
+}
+body.member-mode .member-stat:nth-child(2) .member-stat-icon{
+  background:#e3f7ef!important;color:#237b54!important;
+}
+body.member-mode .member-stat b{color:#1d3924}
+body.member-mode .member-stat span{color:#56675a}
+body.member-mode .member-app-page .pill{background:#edf6df;color:#477334}
+body.member-mode .member-app-page .pill.green{background:#def6e9;color:#167e4b}
+body.member-mode .member-app-page .class-card h3{color:#1f3826}
+body.member-mode .member-app-page .class-card .meta{color:#64766a}
+body.member-mode .member-app-page select,
+body.member-mode .member-app-page input{border-color:#d8e3d0;color:#223625}
+body.member-mode .member-profile-form button{background:#b9ed61;color:#1e2e1c}
+body.member-mode .member-donut{background:conic-gradient(#92c642 var(--progress),#e8f1e2 0)}
+body.member-mode .member-donut-inner,
+body.member-mode .member-insight-item strong{color:#1c3722}
+body.member-mode .member-plan-chip{background:#e8f6d9;color:#3a672a}
+body.member-mode .member-plan .plan-button{color:#386e27;border-color:#c7dbb7}
+body.member-mode .member-rec-detail b{color:#26442c}
+body.member-mode .member-rec-detail button{background:#b9ed61;color:#21341c}
+/* New member space */
+.ofc-dashboard{gap:23px}
+.ofc-member-hero{
+  position:relative;
+  isolation:isolate;
+  background:
+    linear-gradient(98deg,rgba(13,25,17,.98) 0%,rgba(13,28,18,.9) 37%,rgba(15,37,20,.5) 72%,rgba(15,37,20,.15)),
+    url("./assets/gym-interior.png") center/cover;
+  border-radius:23px;
+  box-shadow:0 18px 36px #152d1e2b;
+  min-height:292px;
+  padding:38px 43px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:18px;
+  overflow:hidden;
+  color:#fff;
+}
+.ofc-member-hero:before{
+  content:"";position:absolute;top:28px;left:43px;
+  width:43px;height:4px;border-radius:8px;background:#b6ec5a
+}
+.ofc-member-hero-main{position:relative;z-index:1;max-width:760px}
+.ofc-eyebrow{display:flex;align-items:center;gap:8px;color:#def0c9;letter-spacing:2.1px;font-size:10px;font-weight:900;margin:10px 0 19px}
+.ofc-lime-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#b9ef63;box-shadow:0 0 14px #b9ef6399}
+.ofc-member-hero h1{
+  color:#fff;font-size:clamp(34px,4.35vw,60px);
+  line-height:1.08;letter-spacing:-1.8px;font-weight:900;margin:0 0 13px
+}
+.ofc-member-hero h1 em{font-style:normal;color:#c1ee72}
+.ofc-member-hero p{color:#dce9d6;font-size:15px;line-height:1.6;max-width:520px;margin:0}
+.ofc-hero-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:23px}
+body.member-mode .ofc-hero-buttons button{
+  font-size:13px;padding:11px 17px;display:flex;align-items:center;gap:8px
+}
+body.member-mode .ofc-hero-buttons .ofc-hero-outline{
+  background:#ffffff12;color:#f7fff2;border:1px solid #ffffff58
+}
+body.member-mode .ofc-hero-buttons .ofc-hero-outline:hover{background:#ffffff25}
+.ofc-hero-location{
+  position:relative;z-index:1;min-width:200px;flex-shrink:0;
+  align-self:flex-end;padding:17px;
+  background:#0e2114a8;border:1px solid #ffffff30;border-radius:13px;
+  backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;gap:4px
+}
+.ofc-hero-location span,.ofc-overline{color:#6e9b4d;font-size:10px;letter-spacing:1.7px;font-weight:900}
+.ofc-hero-location span{color:#c6edb0}
+.ofc-hero-location strong{color:#fff;font-size:17px}
+.ofc-hero-location small{color:#cde1c7;font-size:10px}
+.ofc-headingline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+.ofc-headingline h2{font-size:20px;letter-spacing:-.5px;margin:0;color:#1f3324}
+.ofc-headingline span{font-size:11px;color:#7b8a78}
+.ofc-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.ofc-metrics .member-stat{min-height:97px;padding:16px;gap:12px}
+.ofc-metrics .member-stat-icon{height:47px;width:47px;flex-basis:47px;border-radius:13px}
+.ofc-metrics .member-stat b{font-size:25px}
+.ofc-dashboard-grid{display:grid;grid-template-columns:1.17fr .83fr;gap:17px}
+.ofc-box{
+  min-width:0;min-height:220px;
+  background:#fff;border:1px solid #e0e9dc;border-radius:17px;
+  padding:21px 23px;box-shadow:0 8px 23px #213e250b;
+}
+.ofc-box-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.ofc-box-head h3{color:#233628;font-size:20px;line-height:1.2;letter-spacing:-.7px;margin:5px 0 0}
+.ofc-box-head>svg{color:#578a37}
+body.member-mode .ofc-text-link{
+  display:flex;align-items:center;gap:4px;
+  background:transparent!important;color:#4d852e!important;
+  border:0;padding:6px 0;font-size:12px;font-weight:850;white-space:nowrap
+}
+body.member-mode .ofc-text-link:hover{text-decoration:underline}
+.ofc-session{
+  border-top:1px solid #edf1e8;
+  padding:13px 0;display:flex;align-items:center;gap:12px
+}
+.ofc-session-symbol{width:44px;height:44px;flex-shrink:0;background:#edf7e2;color:#588b38;border-radius:11px;display:grid;place-items:center}
+.ofc-session-info{flex:1;min-width:0;display:flex;flex-direction:column}
+.ofc-session-info b{font-size:14px;color:#283b2b}
+.ofc-session-info span{font-size:12px;color:#536457}
+.ofc-session-info small{font-size:11px;color:#89988a}
+.ofc-booked{color:#278354;font-size:10px;font-weight:850;padding:5px 8px;border-radius:17px;background:#e5f7ec}
+.ofc-blank{padding:20px 5px;display:flex;flex-direction:column;align-items:flex-start;gap:9px;color:#4c6254}
+.ofc-blank strong{color:#233d2b}
+.ofc-blank span{font-size:12px}
+.ofc-blank button{font-size:12px;margin-top:5px}
+.ofc-week-summary{display:flex;gap:18px;align-items:flex-end;justify-content:space-between;margin:21px 0 19px}
+.ofc-week-summary>div:first-child{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.ofc-week-summary strong{font-size:47px;color:#255b2a;line-height:1;letter-spacing:-2px}
+.ofc-week-summary span{font-size:12px;color:#607164}
+.ofc-week-sub{display:flex;flex-direction:column;align-items:flex-end}
+.ofc-week-sub b{font-size:19px;color:#1f3d24}
+.ofc-week-sub span{font-size:10px}
+.ofc-weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.ofc-weekday{display:flex;align-items:center;flex-direction:column;gap:6px}
+.ofc-weekday span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid #dce7d5;background:#f6f9f4;color:#6d816c;font-size:12px}
+.ofc-weekday.ofc-done span{background:#b8ec64;color:#1b441f;border-color:#a7db4c}
+.ofc-weekday.ofc-today span{outline:2px solid #a5d44a;outline-offset:2px}
+.ofc-weekday small{font-size:10px;color:#809080}
+.ofc-footnote{font-size:11px;color:#8a9889;margin:14px 0 0}
+.ofc-recommendations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.ofc-class-tile{
+  position:relative;overflow:hidden;
+  min-height:184px;display:flex;flex-direction:column;align-items:flex-start;
+  border:1px solid #dfead8;border-radius:12px;padding:14px;
+  background:linear-gradient(150deg,#edf7e2,#fafdf6 85%);
+}
+.ofc-class-tile:nth-child(2){background:linear-gradient(150deg,#e9f3e7,#f9fcf8 85%)}
+.ofc-class-tile:nth-child(3){background:linear-gradient(150deg,#f0f3e7,#fafdf8 85%)}
+.ofc-class-type{font-size:9px;letter-spacing:1.3px;font-weight:900;color:#55823e;margin:0 0 12px}
+.ofc-class-tile b{color:#223c27;font-size:15px;line-height:1.25}
+.ofc-class-tile small{color:#586e5d;font-size:10px;margin:6px 0 0}
+.ofc-class-tile p{font-size:10px;color:#789078;margin:3px 0 15px}
+body.member-mode .ofc-class-tile button{
+  display:flex;align-items:center;gap:4px;
+  margin-top:auto;padding:8px 9px;font-size:11px
+}
+.ofc-community>p{color:#5c7060;font-size:13px;line-height:1.55;margin:0 0 17px}
+.ofc-location-badges{display:flex;gap:8px;flex-wrap:wrap}
+.ofc-location-badges span{
+  font-size:11px;color:#486b44;font-weight:750;display:flex;align-items:center;gap:4px;
+  background:#f4f8ef;border:1px solid #e0ebd8;padding:9px 10px;border-radius:8px
+}
+.ofc-location-badges span.ofc-home-location{background:#e6f6d7;border-color:#bfe59b;color:#3b6b2d}
+.ofc-membership-strip{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;
+  padding-top:16px;border-top:1px solid #e4ecdf
+}
+.ofc-membership-strip span{font-size:11px;color:#467348;font-weight:750}
+.ofc-membership-strip span i{display:inline-block;background:#36b674;height:7px;width:7px;border-radius:50%;margin-right:5px}
+body.member-mode .ofc-membership-strip button{background:transparent;color:#548435;font-size:11px;padding:4px;display:flex;align-items:center;gap:4px}
+.ofc-footer-note{font-size:11px;color:#8b9b88;margin:0 3px!important}
+.staff-location-switch{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 15px;padding:11px 15px;background:#fff;border:1px solid #dfe5db;border-radius:11px}
+.staff-location-switch>span{font-size:12px;font-weight:750;color:#516a55;margin-right:5px}
+.staff-location-switch button{font-size:12px;padding:8px 13px;background:#eff4e8;color:#436340}
+.staff-location-switch button.selected{background:#b9ed61;color:#21321e}
+@media(max-width:990px){
+  .ofc-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ofc-dashboard-grid{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .ofc-member-hero{padding:45px 22px 20px;min-height:320px;flex-direction:column;align-items:stretch}
+  .ofc-member-hero:before{left:22px;top:24px}
+  .ofc-member-hero h1{font-size:clamp(32px,7.9vw,45px)}
+  .ofc-hero-location{align-self:flex-start;min-width:unset;padding:10px 13px;margin-top:8px}
+  .ofc-hero-location small{display:none}
+  .ofc-headingline h2{font-size:17px}
+  .ofc-headingline span{font-size:10px}
+  .ofc-dashboard-grid{gap:12px}
+  .ofc-box{padding:17px}
+  .ofc-recommendations{grid-template-columns:1fr}
+  .ofc-class-tile{min-height:120px}
+  .ofc-class-type{margin-bottom:7px}
+  .ofc-class-tile p{margin-bottom:11px}
+}
+@media(max-width:420px){
+  .ofc-session{gap:9px}
+  .ofc-session-symbol{width:36px;height:36px}
+  .ofc-booked{font-size:9px;padding:4px}
+  .ofc-weekday span{width:28px;height:28px}
+}
