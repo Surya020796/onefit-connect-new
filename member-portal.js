@@ -26,12 +26,11 @@
   function nameChoices(){
     const input=document.getElementById('memberLoginName');
     if(!input)return;
-    input.setAttribute('list','onefit-member-names');
-    let dl=document.getElementById('onefit-member-names');
-    if(!dl){dl=document.createElement('datalist');dl.id='onefit-member-names';document.body.appendChild(dl);}
-    dl.innerHTML=memberOptionMarkup();
-    input.placeholder='Try Aisha Khan or M001';
-    input.setAttribute('aria-label','Enter your full name or member ID');
+    input.removeAttribute('list');
+    input.setAttribute('autocomplete','off');
+    input.placeholder='e.g. Aisha Khan or M001';
+    const oldList=document.getElementById('onefit-member-names');
+    if(oldList)oldList.remove();
   }
   const oldRenderHome=window.renderHome;
   window.renderHome=function(){oldRenderHome();nameChoices();};
@@ -121,63 +120,86 @@
     insightRange=['week','month','all'].includes(range)?range:'week';
     memberHome();
   };
-  window.memberHome=function(){
-    const m=member(),visits=presentVisits(m),mine=upcomingBookings(m),d=new Date(),start=new Date(d);
-    start.setHours(0,0,0,0);
-    start.setDate(start.getDate()-((start.getDay()+6)%7));
-    const weekStart=formatDay(start),monthStart=formatDay(new Date(d.getFullYear(),d.getMonth(),1));
-    const weekVisits=visits.filter(a=>visitDate(a)>=weekStart), monthVisits=visits.filter(a=>visitDate(a)>=monthStart);
-    const rangeVisits=insightRange==='week'?weekVisits:insightRange==='month'?monthVisits:visits;
-    const goal=4,percent=Math.min(100,Math.round(weekVisits.length/goal*100));
-    const days=Array.from({length:7},(_,i)=>{
-      const date=new Date(start);date.setDate(start.getDate()+i);
-      const attended=visits.some(a=>visitDate(a)===formatDay(date));
-      const isToday=formatDay(date)===formatDay(new Date());
-      return '<div class="member-day '+(attended?'checked':'')+' '+(isToday?'current':'')+'"><span class="circle">'+(attended?ico('check',15):'')+'</span>'+['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]+'</div>';
-    }).join('');
-    const recommended=preferredRecommendations(m);
-    const rangeTabs=[['week','This Week'],['month','This Month'],['all','All Time']].map(a=>'<button class="'+(insightRange===a[0]?'selected':'')+'" onclick="setInsightRange(\''+a[0]+'\')">'+a[1]+'</button>').join('');
-    document.getElementById('app').innerHTML=`
-      <div class="member-dashboard">
-        <section class="member-welcome"><h1>Hi, ${esc(m.name.split(/\s+/)[0])}!</h1><p>Welcome back to OneFit Connect.<br>One membership. Three locations.</p><span class="tag">${ico('pin',15)} &nbsp; Home Location: ${esc(m.location)}</span></section>
-        <section><h2 class="member-section-title">Your Overview</h2><div class="member-stats">
-          ${displayStat('calendar','Classes Attended',visits.length,'Recorded check-ins')}
-          ${displayStat('bookings','Upcoming Classes',mine.length,'Across all locations')}
-          ${displayStat('star','Studio Rating','4.7 / 5','Illustrative demo score')}
-          ${displayStat('pin','Locations Access','3','Locations 1, 2 and 3')}
-        </div></section>
-        <section class="member-panels">
-          <div class="member-panel">
-            <div class="member-panel-header"><div class="member-panel-title">${ico('calendar')} This Week at a Glance</div><button class="member-inline-link" onclick="navigate('activity')">View Activity ${ico('arrow',15)}</button></div>
-            <div class="member-week-progress"><span>Classes attended: <b>${weekVisits.length} of ${goal} goal</b></span><div class="member-progress-line"><i style="width:${percent}%"></i></div><strong>${weekVisits.length} / ${goal}</strong></div>
-            <div class="member-week-days">${days}</div>
+  window.memberHome=function freshMemberHome(){
+  const m=member();
+  const visits=presentVisits(m);
+  const mine=upcomingBookings(m).sort((a,b)=>{
+    const ca=classForBooking(a),cb=classForBooking(b);
+    return ((ca?.date||'')+' '+(ca?.time||'')).localeCompare((cb?.date||'')+' '+(cb?.time||''));
+  });
+  const now=new Date();
+  const first=new Date(now);first.setHours(0,0,0,0);first.setDate(first.getDate()-((first.getDay()+6)%7));
+  const weekStart=formatDay(first);
+  const thirtyDays=new Date(now);thirtyDays.setDate(now.getDate()-29);
+  const thirtyStart=formatDay(thirtyDays);
+  const weeklyVisits=visits.filter(a=>visitDate(a)>=weekStart);
+  const recentVisits=visits.filter(a=>visitDate(a)>=thirtyStart);
+  const nextClasses=mine.slice(0,3).map(b=>{
+    const c=classForBooking(b);
+    if(!c)return '';
+    return `<div class="ofc-session"><div class="ofc-session-symbol">${ico('calendar',20)}</div><div class="ofc-session-info"><b>${esc(c.name)}</b><span>${esc(c.date)} · ${esc(c.time)}</span><small>${esc(c.location)} · ${esc(c.instructor)}</small></div><span class="ofc-booked">Booked</span></div>`;
+  }).join('');
+  const weekdays=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((label,i)=>{
+    const day=new Date(first);day.setDate(day.getDate()+i);
+    const key=formatDay(day);
+    const checked=visits.some(a=>visitDate(a)===key);
+    const isToday=key===formatDay(now);
+    return `<div class="ofc-weekday ${checked?'ofc-done':''} ${isToday?'ofc-today':''}"><span>${checked?ico('check',15):day.getDate()}</span><small>${label}</small></div>`;
+  }).join('');
+  const recommended=preferredRecommendations(m).slice(0,3);
+  const recMarkup=recommended.map(c=>{
+    const type=(c.type||'Class').toUpperCase();
+    return `<article class="ofc-class-tile"><span class="ofc-class-type">${esc(type)}</span><b>${esc(c.name)}</b><small>${esc(c.date)} · ${esc(c.time)}</small><p>${esc(c.location)} · ${Math.max(0,c.capacity-c.booked)} seats left</p><button onclick="recommendBook('${esc(c.id)}')">Book this class ${ico('arrow',14)}</button></article>`;
+  }).join('');
+  const activityText=weeklyVisits.length===1?'session':"sessions";
+  document.getElementById('app').innerHTML=`
+    <div class="member-dashboard ofc-dashboard">
+      <section class="ofc-member-hero">
+        <div class="ofc-member-hero-main">
+          <span class="ofc-eyebrow"><span class="ofc-lime-dot"></span> YOUR ONEFIT SPACE</span>
+          <h1>Keep moving, <em>${esc(m.name.split(/\s+/)[0])}.</em></h1>
+          <p>Your classes, bookings, and progress — connected across all three studios.</p>
+          <div class="ofc-hero-buttons">
+            <button onclick="navigate('classes')">Explore classes ${ico('arrow',17)}</button>
+            <button class="ofc-hero-outline" onclick="navigate('mybookings')">My bookings</button>
           </div>
-          <div class="member-panel">
-            <div class="member-panel-header"><div class="member-panel-title">${ico('activity')} Your Fitness Insights</div><div class="member-range">${rangeTabs}</div></div>
-            <div class="member-insight-row">
-              <div class="member-donut" style="--progress:${percent}%"><div class="member-donut-inner"><b>${percent}%</b><small>Weekly goal</small></div></div>
-              <div class="member-insight-item"><span class="symbol">🔥</span><strong>${(rangeVisits.length*360).toLocaleString()}</strong><span>Est. calories*</span></div>
-              <div class="member-insight-item"><span class="symbol">◷</span><strong>${rangeVisits.length*60} min</strong><span>Est. workout time*</span></div>
-              <div class="member-insight-item"><span class="symbol">✓</span><strong>${rangeVisits.length}</strong><span>Classes attended</span></div>
-            </div>
-            <div style="font-size:10px;color:#8290a7;margin-top:9px">*Illustrative estimates of 60 minutes and 360 calories per attended class, not tracked workout data.</div>
-          </div>
-          <div class="member-panel">
-            <div class="member-panel-header"><div><div class="member-panel-title">${ico('star')} Recommended for You</div><div class="muted small">Available classes across your three locations.</div></div><button class="member-inline-link" onclick="navigate('classes')">View All ${ico('arrow',15)}</button></div>
-            <div class="member-recs">${recommended.length?recommended.map(recCard).join(''):'<div class="member-empty">No available classes to recommend right now. Browse the full schedule for updates.</div>'}</div>
-          </div>
-          <div class="member-panel">
-            <div class="member-panel-header"><div class="member-panel-title">${ico('award')} Membership</div></div>
-            <div class="member-plan">
-              <div class="member-plan-main"><span class="member-plan-chip">Standard Plan</span><span class="member-plan-live">${esc(m.status||'Active')}</span><div class="member-plan-sub">Unlimited access · All 3 locations</div></div>
-              <div class="member-plan-info"><p>${ico('calendar',15)} &nbsp; Billing: Demo only</p><p>${ico('bookings',15)} &nbsp; No payment details collected</p></div>
-              <button class="plan-button" onclick="manageDemoPlan()">Manage Plan ${ico('arrow',15)}</button>
-            </div>
-          </div>
-        </section>
-        <p style="font-size:11px;color:#7f8da8;margin:0">Prototype dashboard. Booking and attendance metrics use your saved demo records; plan, rating and estimated fitness figures are illustrative.</p>
-      </div>`;
-  };
+        </div>
+        <div class="ofc-hero-location"><span>HOME STUDIO</span><strong>${esc(m.location)}</strong><small>One membership · Three locations</small></div>
+      </section>
+      <section>
+        <div class="ofc-headingline"><h2>Your membership at a glance</h2><span>Live prototype data</span></div>
+        <div class="ofc-metrics">
+          ${displayStat('bookings','Upcoming classes',mine.length,'Current reservations')}
+          ${displayStat('check','Classes attended',visits.length,'Recorded visits')}
+          ${displayStat('pin','Studio access','03','All locations')}
+          ${displayStat('award','Member status',esc(m.status||'Active'),'Shared membership')}
+        </div>
+      </section>
+      <section class="ofc-dashboard-grid">
+        <div class="ofc-box">
+          <div class="ofc-box-head"><div><span class="ofc-overline">UP NEXT</span><h3>Your classes</h3></div><button class="ofc-text-link" onclick="navigate('mybookings')">All bookings ${ico('arrow',15)}</button></div>
+          ${nextClasses||'<div class="ofc-blank"><strong>No upcoming reservations yet.</strong><span>Find a session that works for you at any OneFit location.</span><button onclick="navigate(\'classes\')">Find a class</button></div>'}
+        </div>
+        <div class="ofc-box ofc-weekly">
+          <div class="ofc-box-head"><div><span class="ofc-overline">YOUR MOMENTUM</span><h3>This week</h3></div><button class="ofc-text-link" onclick="navigate('activity')">Activity ${ico('arrow',15)}</button></div>
+          <div class="ofc-week-summary"><div><strong>${weeklyVisits.length}</strong><span>${activityText} attended this week</span></div><div class="ofc-week-sub"><b>${recentVisits.length}</b><span>last 30 days</span></div></div>
+          <div class="ofc-weekdays">${weekdays}</div>
+          <p class="ofc-footnote">Attendance updates when staff marks you present at a class.</p>
+        </div>
+        <div class="ofc-box">
+          <div class="ofc-box-head"><div><span class="ofc-overline">FIND YOUR NEXT MOVE</span><h3>Classes to try</h3></div><button class="ofc-text-link" onclick="navigate('classes')">Browse all ${ico('arrow',15)}</button></div>
+          <div class="ofc-recommendations">${recMarkup||'<p class="ofc-footnote">No available classes right now. Check the full schedule for new sessions.</p>'}</div>
+        </div>
+        <div class="ofc-box ofc-community">
+          <div class="ofc-box-head"><div><span class="ofc-overline">YOUR MEMBERSHIP</span><h3>Three studios. One pass.</h3></div>${ico('pin',24)}</div>
+          <p>Book at whichever location suits you best. Your schedule and attendance stay together in OneFit Connect.</p>
+          <div class="ofc-location-badges">${locations.map(l=>`<span class="${m.location===l?'ofc-home-location':''}">${ico('pin',14)} ${esc(l)}${m.location===l?' · Home':''}</span>`).join('')}</div>
+          <div class="ofc-membership-strip"><span><i></i> ${esc(m.status||'Active')} membership</span><button onclick="navigate('profile')">View profile ${ico('arrow',14)}</button></div>
+        </div>
+      </section>
+      <p class="ofc-footer-note">OneFit Connect prototype · Sample members and classes · Demo data is saved in this browser</p>
+    </div>`;
+};
   window.manageDemoPlan=function(){
     document.getElementById('modal').innerHTML='<h2>Standard Membership · Demo</h2><p>Your sample membership is active across all three OneFit locations. This prototype does not process payments or change real billing information.</p><p class="muted small">For the demonstration, use Book a Class or My Bookings to manage your sessions.</p><button onclick="closeModal()">Got it</button>';
     openModal();
