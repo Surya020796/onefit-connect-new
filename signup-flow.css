@@ -164,3 +164,11 @@ body:has(.ofc-join-page) .layout{min-height:calc(100vh - 66px)}
  .ofc-join-main .ofc-payment-methods button{min-height:55px;align-items:center}
  .ofc-join-main .ofc-payment-methods button small{margin-top:0}
 }
+
+
+/* Explicit existing / new member mode tabs on the homepage */
+.ofc-auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin:1px 0 13px;border:1px solid #dfe9d8;border-radius:11px;background:#f3f7ee}
+.role-card .ofc-auth-tabs button{width:100%;min-height:38px!important;font-size:11px!important;font-weight:850!important;margin:0!important;border-radius:8px!important;padding:8px 7px!important;box-shadow:none!important;line-height:1.25!important}
+.role-card .ofc-auth-tabs button.ofc-auth-current{background:#fff!important;color:#2b5628!important;box-shadow:0 2px 8px #24451d16!important}
+.role-card .ofc-auth-tabs button:not(.ofc-auth-current){background:transparent!important;color:#557849!important;border:0!important}
+.role-card .ofc-auth-tabs button:not(.ofc-auth-current):hover{background:#e3f3d2!important;color:#29471f!important}
