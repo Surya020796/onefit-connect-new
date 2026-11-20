@@ -1,0 +1,45 @@
+name: Refine OneFit homepage
+on:
+  push:
+    paths:
+      - '.github/workflows/refine-homepage.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Separate bundled gym photo and activate refreshed styles
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, re
+          p = Path('index.html')
+          src = p.read_text(encoding='utf-8')
+          photo = re.search(r':root\{--gym-image:url\("data:image/png;base64,([^"]+)"\)\}', src)
+          if photo:
+              asset = Path('assets/gym-interior.png')
+              asset.parent.mkdir(exist_ok=True, parents=True)
+              asset.write_bytes(base64.b64decode(photo.group(1)))
+              src = src[:photo.start()] + ':root{--gym-image:url("./assets/gym-interior.png")}' + src[photo.end():]
+          if 'href="./onefit-refined.css"' not in src:
+              assert '</head>' in src, 'Missing HTML head'
+              src = src.replace('</head>', '<link rel="stylesheet" href="./onefit-refined.css">\n</head>', 1)
+          p.write_text(src, encoding='utf-8')
+          PY
+      - name: Commit redesigned homepage
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/gym-interior.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix gym images and enable refreshed homepage"
+            git push
+          fi
