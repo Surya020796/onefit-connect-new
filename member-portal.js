@@ -93,18 +93,9 @@
       field.focus();return;
     }
     if(!found.length){
-      if(/^m\d+$/i.test(name)){
-        toast('That Member ID does not exist. Try your name instead.');field.focus();return;
-      }
-      if(name.length<2 || !/[a-zA-Z\u00c0-\u024f]/.test(name) || name.length>90){
-        toast('Please enter a valid name.');field.focus();return;
-      }
-      let nextId=Math.max(0,...members.map(m=>Number(m.id.replace(/^M/i,''))||0))+1;
-      const newMember={id:'M'+String(nextId).padStart(3,'0'),name,location:locations[0],status:'Active',email:''};
-      members.push(newMember);
-      save();
-      found=[newMember];
-      toast('Welcome to OneFit! Your demo profile was created.');
+      toast("Member not found. Select New Member Sign Up to create an account.");
+      field.focus();
+      return;
     }
     current.memberId=found[0].id;
     const password=document.getElementById('memberLoginPassword');
