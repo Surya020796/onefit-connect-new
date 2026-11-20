@@ -1,0 +1,154 @@
+
+/* OneFit member dashboard — the landing page, staff and manager retain their themes. */
+body.member-mode{--blue:#0b65eb;--blue2:#004fd1;--bg:#f7f9fe;--ink:#112354;--muted:#65718c;--line:#e0e7f4;--shadow:0 8px 24px #0d28560d;background:#f7f9fe;color:#112354;font-family:Inter,Segoe UI,Arial,sans-serif}
+body.member-mode .topbar{height:67px;min-height:67px;background:linear-gradient(107deg,#0047ad,#082667 73%,#061c51);box-shadow:0 5px 16px #002f8925;border:0;padding:0 clamp(16px,2.7vw,44px)}
+body.member-mode .brand{font-weight:800;font-size:20px;letter-spacing:-.45px}
+body.member-mode .brandmark{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#08b8ff,#1167ed);color:white;box-shadow:0 0 0 3px #ffffff18}
+body.member-mode #roleTag{background:#ffffff26;color:#fff;border-radius:22px;padding:5px 16px;font-weight:750;font-size:12px;letter-spacing:.3px}
+body.member-mode .top-actions{gap:12px}
+body.member-mode .top-actions button{background:#ffffff12;color:white;border:1px solid #ffffff54;border-radius:9px;font-size:13px;padding:9px 13px}
+body.member-mode .top-actions button:hover{background:#ffffff28}
+body.member-mode .member-top-identity{display:flex;flex-direction:column;align-items:flex-end;line-height:1.3;font-size:13px;font-weight:750;margin-left:auto;color:#fff}
+body.member-mode .member-top-identity small{font-size:11px;font-weight:500;color:#c5ddff}
+body.member-mode .layout{display:flex;flex-direction:column;min-height:calc(100vh - 67px)}
+body.member-mode .sidebar.show{position:sticky;top:67px;z-index:9;display:flex;width:100%;padding:0 clamp(16px,2.7vw,44px);gap:16px;min-height:52px;background:#fff;border-right:0;border-bottom:1px solid #e1e8f6;box-shadow:0 2px 8px #143f7807;overflow-x:auto;scrollbar-width:thin}
+body.member-mode .sidebar .navlabel{display:none}
+body.member-mode .navbtn{white-space:nowrap;width:auto;display:flex;align-items:center;gap:10px;background:none;color:#51617d;font-size:13px;font-weight:760;border-radius:0;border-bottom:3px solid transparent;padding:13px 13px 10px;margin:0;transition:.15s}
+body.member-mode .navbtn svg{width:19px;height:19px;flex-shrink:0}
+body.member-mode .navbtn:hover{color:#075fe5;background:#f3f8ff;transform:none}
+body.member-mode .navbtn.active{color:#075fe5;background:transparent;border-color:#0870ef}
+body.member-mode .main,body.member-mode .main.wide{max-width:1590px;width:100%;margin:0 auto;padding:24px clamp(16px,2.2vw,38px) 56px}
+body.member-mode button{background:#0868ee;color:white;border-radius:9px}
+body.member-mode button:hover{background:#0053ca}
+body.member-mode button.secondary{background:#edf4ff;color:#0861df;border:1px solid #cadcff}
+body.member-mode .card,body.member-mode .kpi{border:1px solid #e3eaf5;border-radius:15px;box-shadow:0 6px 24px #1837650b;background:#fff}
+body.member-mode .section-head h2{font-size:21px;color:#0d2158}
+body.member-mode .muted{color:#66748f}
+.member-dashboard{display:flex;flex-direction:column;gap:19px;color:#12255a}
+.member-welcome{position:relative;min-height:178px;max-width:100%;border-radius:17px;overflow:hidden;padding:25px 36px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;box-shadow:0 13px 27px #0c388025;background-image:linear-gradient(93deg,#031c57f5 1%,#053b9be9 42%,#08469182 70%,#0c2a6b48),url("./assets/gym-interior.png");background-position:center,center 52%;background-size:cover}
+.member-welcome h1{font-size:clamp(31px,3.3vw,45px);margin:0 0 4px;color:#fff;letter-spacing:-1.25px;font-weight:850;line-height:1.08}
+.member-welcome p{margin:0;color:#f4f8ff;font-weight:620;line-height:1.45;font-size:16px}
+.member-welcome .tag{margin-top:14px;border-radius:24px;color:#fff;padding:8px 13px;background:#ffffff2b;border:1px solid #ffffff30;font-size:12px;font-weight:750;backdrop-filter:blur(6px)}
+.member-section-title{font-weight:850;color:#0c2056;letter-spacing:-.65px;font-size:22px;line-height:1.2;margin:0 0 13px}
+.member-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.member-stat{min-height:98px;border:1px solid #e2eafd;border-radius:16px;padding:17px 19px;display:flex;align-items:center;gap:15px;box-shadow:0 5px 20px #1837650a}
+.member-stat:nth-child(1){background:linear-gradient(113deg,#eef5ff,#e6f1ff)}
+.member-stat:nth-child(2){background:linear-gradient(113deg,#eafbf3,#e1f7ef)}
+.member-stat:nth-child(3){background:linear-gradient(113deg,#fffaf0,#fff5e5)}
+.member-stat:nth-child(4){background:linear-gradient(113deg,#f4f0ff,#f0edff)}
+.member-stat-icon{flex:0 0 52px;width:52px;height:52px;border-radius:14px;background:#dcebff;color:#0870e8;display:grid;place-items:center}
+.member-stat:nth-child(2) .member-stat-icon{background:#d6f4e2;color:#12a44b}
+.member-stat:nth-child(3) .member-stat-icon{background:#fff1cc;color:#eeac0b}
+.member-stat:nth-child(4) .member-stat-icon{background:#e9e1ff;color:#8554f0}
+.member-stat-icon svg{width:28px;height:28px}
+.member-stat b{display:block;font-size:28px;line-height:1.1;color:#0b225d;font-weight:900;letter-spacing:-1.2px}
+.member-stat span{display:block;font-size:12px;line-height:1.35;color:#2c3e65;font-weight:650;margin-top:3px}
+.member-panels{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.member-panel{border:1px solid #e0e8f4;background:#fff;border-radius:17px;box-shadow:0 7px 22px #1837650c;padding:20px 22px;min-width:0}
+.member-panel-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px;flex-wrap:wrap}
+.member-panel-title{display:flex;gap:10px;align-items:center;font-weight:850;color:#0d225c;font-size:17px;letter-spacing:-.4px}
+.member-panel-title svg{width:22px;height:22px;color:#0561e4}
+.member-inline-link{background:transparent!important;color:#0867e8!important;font-size:13px;padding:5px 0!important;font-weight:800}
+.member-inline-link:hover{text-decoration:underline;background:none!important}
+.member-week-progress{display:flex;gap:16px;justify-content:space-between;align-items:center;font-size:13px;color:#415478;margin-bottom:18px}
+.member-progress-line{height:9px;width:160px;background:#e9eff8;border-radius:99px;overflow:hidden}
+.member-progress-line i{display:block;background:#0870f2;height:100%;border-radius:99px}
+.member-week-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;text-align:center}
+.member-day{font-size:12px;color:#64748f;font-weight:700}
+.member-day .circle{display:grid;place-items:center;width:28px;height:28px;margin:0 auto 6px;border:2px solid #dce3ee;color:#8491a7;border-radius:50%;font-size:12px}
+.member-day.checked .circle{background:#16aa65;color:#fff;border-color:#16aa65;box-shadow:0 4px 10px #15aa6533}
+.member-day.current .circle{border-color:#126ee7;color:#126ee7}
+.member-range{display:flex;align-items:center;gap:5px}
+.member-range button{background:#fff!important;color:#64748d!important;border:1px solid #e0e7f2;border-radius:18px!important;font-size:10px;padding:6px 10px}
+.member-range button.selected{background:#092567!important;color:#fff!important;border-color:#092567}
+.member-insight-row{display:grid;grid-template-columns:120px repeat(3,minmax(0,1fr));align-items:center;gap:10px;margin-top:6px}
+.member-donut{width:112px;height:112px;border-radius:50%;background:conic-gradient(#086bee var(--progress),#dfebff 0);display:grid;place-items:center}
+.member-donut-inner{width:83px;height:83px;background:#fff;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#08245d}
+.member-donut-inner b{font-size:23px;line-height:1.1}
+.member-donut-inner small{font-size:9px}
+.member-insight-item{padding-left:12px;border-left:1px solid #e3e9f2;min-height:72px;display:flex;flex-direction:column;justify-content:center}
+.member-insight-item .symbol{font-size:19px}
+.member-insight-item strong{font-size:19px;color:#09265f;line-height:1.4}
+.member-insight-item span{font-size:11px;color:#6f7b90;line-height:1.3}
+.member-recs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.member-rec{display:flex;align-items:center;gap:11px;min-width:0;background:#fafcff;border:1px solid #e7edf7;border-radius:12px;padding:9px}
+.member-rec-photo{flex:0 0 88px;width:88px;height:90px;background-size:cover;background-position:center;border-radius:9px;background-color:#174c85}
+.member-rec-photo.hiit{background-image:linear-gradient(#0327560a,#03275627),url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=260&q=78")}
+.member-rec-photo.yoga{background-image:linear-gradient(#0327560a,#0327561d),url("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=260&q=78")}
+.member-rec-photo.strength{background-image:linear-gradient(#0327560a,#03275627),url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=260&q=78")}
+.member-rec-photo.other{background-image:linear-gradient(#0327560a,#03275627),url("./assets/gym-interior.png")}
+.member-rec-detail{flex:1;min-width:0}
+.member-rec-detail b{font-size:14px;color:#09265f;display:block;line-height:1.25}
+.member-rec-detail small{font-size:11px;color:#586b88;display:block;line-height:1.5;white-space:normal}
+.member-rec-detail button{margin-top:6px;padding:5px 11px;font-size:12px;font-weight:800}
+.member-rec-detail .status{font-size:10px;font-weight:750;color:#13a26d;margin-top:6px;display:inline-block}
+.member-plan{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:4px 0}
+.member-plan-main{flex:1;min-width:165px}
+.member-plan-chip{display:inline-block;padding:6px 9px;background:#e6efff;color:#093aa6;border-radius:6px;font-weight:850;font-size:13px}
+.member-plan-live{display:inline-block;margin-left:6px;padding:5px 9px;background:#dcf9e7;color:#158449;border-radius:17px;font-size:11px;font-weight:800}
+.member-plan-sub{margin-top:10px;font-size:12px;color:#52627d}
+.member-plan-info{border-left:1px solid #e2e8f5;padding-left:17px;color:#3e4e6b;font-size:12px;flex:1;min-width:195px}
+.member-plan-info p{margin:2px 0 8px}
+.member-plan .plan-button{padding:10px 14px;font-size:12px;white-space:nowrap;background:#f9fbff;color:#0b64e9;border:1px solid #b8d3fb}
+.member-empty{color:#6a7992;font-size:12px;padding:18px 0}
+body.member-mode .member-app-page .card{padding:21px}
+body.member-mode .member-app-page .section-head{margin-top:0}
+body.member-mode .member-app-page .kpis{margin-top:15px}
+body.member-mode .member-app-page .field{background:#fff;color:#142453}
+body.member-mode .member-app-page select,body.member-mode .member-app-page input{border-color:#dce5f1;background:#fff;color:#213763}
+body.member-mode .member-app-page .pill{background:#eaf2ff;color:#1659b9}
+body.member-mode .member-app-page .pill.green{background:#e7f8ef;color:#0f8b50}
+body.member-mode .member-app-page .pill.red{background:#ffecef;color:#be4251}
+body.member-mode .member-app-page .class-card h3{color:#0a275e}
+body.member-mode .member-app-page .class-card .meta{color:#62748f}
+.member-activity-list{display:flex;flex-direction:column;gap:10px}
+.member-activity-line{border:1px solid #e6ecf7;border-radius:12px;padding:13px 15px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.member-activity-line strong{display:block;font-size:14px}
+.member-activity-line small{display:block;color:#718099;font-size:12px;margin-top:3px}
+.member-activity-line .pill{flex-shrink:0}
+.member-profile-form{max-width:650px}
+.member-profile-form label{display:block;font-weight:700;color:#27416f;font-size:13px;margin-bottom:13px}
+.member-profile-form label input,.member-profile-form label select{display:block;margin-top:5px}
+.member-profile-form button{margin-top:7px}
+@media(max-width:1120px){
+ .member-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .member-panels{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ body.member-mode .topbar{padding:0 13px}
+ body.member-mode .brand{font-size:16px}
+ body.member-mode .top-actions{gap:6px}
+ body.member-mode .top-actions button{padding:7px 9px;font-size:11px}
+ body.member-mode .member-top-identity{display:none}
+ body.member-mode .sidebar.show{top:67px;padding:0 8px;gap:1px}
+ body.member-mode .navbtn{padding:12px 9px;font-size:12px;gap:7px}
+ body.member-mode .navbtn svg{width:16px;height:16px}
+ body.member-mode .main,body.member-mode .main.wide{padding:15px 13px 42px}
+ .member-welcome{padding:28px 22px;min-height:194px}
+ .member-welcome h1{font-size:34px}
+ .member-welcome p{font-size:13px}
+ .member-panels{gap:13px}
+ .member-panel{padding:17px}
+ .member-recs{grid-template-columns:1fr}
+ .member-insight-row{grid-template-columns:100px repeat(3,minmax(0,1fr));gap:5px}
+ .member-donut{width:92px;height:92px}
+ .member-donut-inner{width:68px;height:68px}
+ .member-donut-inner b{font-size:18px}
+ .member-insight-item{padding-left:8px}
+ .member-insight-item strong{font-size:15px}
+}
+@media(max-width:470px){
+ .member-stats{gap:9px}
+ .member-stat{padding:12px 10px;gap:9px;min-height:86px}
+ .member-stat-icon{width:36px;height:36px;flex-basis:36px}
+ .member-stat-icon svg{width:20px;height:20px}
+ .member-stat b{font-size:21px}
+ .member-stat span{font-size:10px}
+ .member-week-progress{flex-direction:column;align-items:stretch;gap:7px}
+ .member-progress-line{width:100%}
+ .member-week-days{gap:1px}
+ .member-insight-row{grid-template-columns:1fr 1fr;gap:12px}
+ .member-donut{margin:auto}
+ .member-insight-item{min-height:55px}
+ body.member-mode .top-actions #roleTag{display:none}
+}
