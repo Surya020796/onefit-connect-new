@@ -77,6 +77,7 @@ body{background:radial-gradient(ellipse at 10% 32%,#e3f1cf 0%,transparent 42%),r
 @media(max-width:650px){.hero{padding:35px 24px!important;min-height:260px}.hero h1{font-size:36px!important}}
 </style>
 <link rel="stylesheet" href="./onefit-refined.css">
+<link rel="stylesheet" href="./member-portal.css">
 </head>
 <body>
 <header class="topbar"><div class="brand"><span class="brandmark">◎</span> OneFit Connect</div><div class="top-actions"><span id="roleTag" class="small"></span><button onclick="showTutorial()">Tutorial</button><button id="homeBtn" class="secondary" style="display:none" onclick="goHome()">Exit portal</button></div></header>
@@ -142,4 +143,5 @@ function openModal(){document.getElementById('modalBack').classList.add('show')}
 function showTutorial(){document.getElementById('modal').innerHTML=`<h2>ONEFIT STUDIO OS · Quick tutorial</h2><p class="muted">A 2–3 minute walkthrough for the product owner.</p><div class="tutorial-step"><b>1. Member</b><div class="small muted">Enter as a member, browse all three locations, book a class and view or cancel the reservation.</div></div><div class="tutorial-step"><b>2. Front-desk staff</b><div class="small muted">Choose a studio, open a class roster and mark a booked member present.</div></div><div class="tutorial-step"><b>3. Manager</b><div class="small muted">Review the combined dashboard, add a local class and check reports.</div></div><div class="notice">All interactions use synthetic sample data in this browser. Refreshing the page preserves changes through localStorage.</div><div style="text-align:right"><button onclick="closeModal()">Close tutorial</button></div>`;openModal()}
 renderHome();
 </script>
+<script src="./member-portal.js"></script>
 </body></html>
