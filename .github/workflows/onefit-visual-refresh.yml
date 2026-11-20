@@ -1,0 +1,58 @@
+name: Apply OneFit homepage visual refresh
+on:
+  push:
+    paths:
+      - '.github/workflows/onefit-visual-refresh.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-visual-refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Extract embedded image and link updated styles
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, base64
+          site = Path("index.html")
+          text = site.read_text(encoding="utf-8")
+          pattern = r':root\{--gym-image:url\("data:image/png;base64,([^"]+)"\)\}'
+          found = re.search(pattern, text)
+          if found:
+              picture = base64.b64decode(found.group(1), validate=True)
+              if not picture.startswith(b"\x89PNG\r\n\x1a\n"):
+                  raise ValueError("Unexpected gym image format: refusing to rewrite.")
+              directory = Path("assets")
+              directory.mkdir(exist_ok=True)
+              (directory / "gym-interior.png").write_bytes(picture)
+              text = text[:found.start()] + ':root{--gym-image:url("./assets/gym-interior.png")}' + text[found.end():]
+          elif not Path("assets/gym-interior.png").exists():
+              raise ValueError("Original bundled gym image missing; refusing to alter site.")
+          if 'href="./onefit-refined.css"' not in text:
+              if "</head>" not in text:
+                  raise ValueError("Missing head closing tag; refusing to alter site.")
+              text = text.replace("</head>", '<link rel="stylesheet" href="./onefit-refined.css">\n</head>', 1)
+          site.write_text(text, encoding="utf-8")
+          print("Site updated. Index size:", site.stat().st_size)
+          PY
+      - name: Commit refreshed website
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/gym-interior.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix gym background loading and activate refreshed homepage"
+            git push origin HEAD:main
+          else
+            echo "Visual refresh already applied"
+          fi
