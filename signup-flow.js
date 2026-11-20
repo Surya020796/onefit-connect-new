@@ -17,11 +17,13 @@
   const chosenMethod=()=>methods.find(p=>p.id===state.paymentMethod)||methods[0];
   function insertEntryPoint(){
     const form=document.querySelector("form.onefit-simple-login");
-    if(!form||form.parentElement.querySelector(".ofc-signup-trigger"))return;
-    const action=document.createElement("div");
-    action.className="ofc-signup-trigger";
-    action.innerHTML='<div class="ofc-join-divider"><span>New to OneFit Connect?</span></div><button type="button" class="ofc-join-link" onclick="showSignup()">Create a new member account →</button>';
-    form.after(action);
+    if(!form||form.parentElement.querySelector(".ofc-auth-tabs"))return;
+    const tabs=document.createElement("div");
+    tabs.className="ofc-auth-tabs";
+    tabs.setAttribute("role","group");
+    tabs.setAttribute("aria-label","Member access");
+    tabs.innerHTML='<button type="button" class="ofc-auth-current" aria-current="page">Existing Member Login</button><button type="button" onclick="showSignup()">New Member Sign Up</button>';
+    form.before(tabs);
   }
   const originalRenderHome=window.renderHome;
   window.renderHome=function(){originalRenderHome();insertEntryPoint();};
